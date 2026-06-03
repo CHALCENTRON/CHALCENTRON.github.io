@@ -5,82 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    
     <style>
-        /* Vintage CRT Green Phosphor Palette */
-        :root {
-            --term-green: #00cc44;
-            --term-dim: #006622;
-            --term-bg: #030303;
-        }
+    /* Absolute Style Reset to Kill GitHub Themes */
+    html, body, div, span, input {
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        outline: none !important;
+        background-color: #030303 !important;
+        box-shadow: none !important;
+    }
 
-        * {
-            box-sizing: border-box;
-        }
+    /* Force 14pt Courier Prime Matrix Styling */
+    body {
+        background-color: #030303 !important;
+        color: #00cc44 !important;
+        font-family: 'Courier Prime', 'Courier New', Courier, monospace !important;
+        font-size: 14pt !important;
+        line-height: 1.5 !important;
+        padding: 40px !important; /* Re-inject internal spacing safely */
+        overflow-x: hidden;
+    }
 
-        body {
-            background-color: var(--term-bg);
-            color: var(--term-green);
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 14px;
-            line-height: 1.4;
-            margin: 0;
-            padding: 20px;
-            overflow-x: hidden;
-        }
+    /* Target the text input directly to prevent font fallback glitches */
+    #cmd-input {
+        background: transparent !important;
+        border: none !important;
+        color: #00cc44 !important;
+        font-family: 'Courier Prime', 'Courier New', Courier, monospace !important;
+        font-size: 14pt !important;
+        flex-grow: 1;
+        outline: none !important;
+    }
 
-        /* Scanline Effect overlay */
-        body::before {
-            content: " ";
-            display: block;
-            position: fixed;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            z-index: 99999;
-            background-size: 100% 3px, 3px 100%;
-            pointer-events: none;
-        }
+    /* Scanline Effect Overlay */
+    body::before {
+        content: " ";
+        display: block;
+        position: fixed;
+        top: 0; left: 0; bottom: 0; right: 0;
+        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+        z-index: 99999;
+        background-size: 100% 3px;
+        pointer-events: none;
+    }
 
-        #terminal {
-            max-width: 900px;
-            margin: 0 auto;
-        }
+    #terminal {
+        max-width: 900px;
+        margin: 0 auto;
+    }
 
-        .output-line {
-            white-space: pre-wrap;
-            margin-bottom: 4px;
-        }
+    .output-line {
+        white-space: pre-wrap;
+        margin-bottom: 6px;
+    }
 
-        .dim {
-            color: var(--term-dim);
-        }
+    #input-container {
+        display: flex;
+        align-items: center;
+        margin-top: 15px;
+    }
 
-        #input-container {
-            display: flex;
-            align-items: center;
-            margin-top: 15px;
-        }
+    #prompt {
+        margin-right: 10px;
+        font-weight: bold;
+        user-select: none;
+    }
+</style>
 
-        #prompt {
-            margin-right: 10px;
-            font-weight: bold;
-            user-select: none;
-        }
-
-        #cmd-input {
-            background: transparent;
-            border: none;
-            color: var(--term-green);
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 14px;
-            flex-grow: 1;
-            outline: none;
-        }
-
-        /* Standard scrollbar hiding to maintain the matrix texture */
-        ::-webkit-scrollbar {
-            width: 0px;
-            background: transparent;
-        }
-    </style>
 </head>
 <body>
 
